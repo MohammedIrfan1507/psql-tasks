@@ -1,0 +1,41 @@
+create table players(
+personID int ,name varchar,age int ,goals int ,club_id int ,country_id int);
+
+INSERT INTO player(personID,name,age,goals,club_id,country_id)values(1,'Messi',34,761,901,102),
+       (2,'Ronaldo',37,801,897,109),(3,'Neymar',30,344,901,158),(4,'Salah',29,223,635,149),(5,'Kane',28,241,975,101);
+
+select * from player;
+create table club (id int, club_name varchar, coach_id int, country_id int);
+
+insert into club (id, club_name, coach_id, country_id)
+values (635, 'Liverpool', 7456, 101),(723, 'Juventus', 2648, 136),
+		(893, 'Barcelona', 5975, 135),
+		(897, 'Manchester U', 4821, 101),
+      	(901, 'PSG', 2349, 202),(975, 'Tottenham', 3414, 101);
+select * from club;
+create table coach (id int, coach_name varchar, age int, country_id int);
+insert into coach(id, coach_name, age, country_id)
+values(2349, 'Pochettino', 50, 102),(2648, 'Allegri', 54, 136),(3414, 'Conte', 52, 136),(4821, 'Rangnick', 63, 124),
+(5975, 'Xavi', 42, 135),(7456, 'Klopp', 54, 124);
+select * from coach;
+create table country(
+	id int, 
+	name varchar);
+
+insert into country(id, name)values(101, 'England'),(102, 'Argentina'),
+	(109, 'Portugal'),(124, 'Germany'),(135, 'Spain'),(136, 'Italy'),
+	(149, 'Egypt'),(158, 'Brazil'),(202, 'France');
+
+select * from country;
+*******************************TASK*********************************
+select club.name,country.name from club,country where country.name='England'and
+club.country_ID=Country.ID;
+**********************************************
+select name,coach_name from players,coach where coach.country_ID=players.country_id;
+**************************************************
+select players.name,club_name from players,club where players.club_id=club.id and club.country_id=players.country_id;
+*************************************************
+select coach_name,age from coach,club where club.coach_id=coach.id and club.country_id !=coach.country_id and coach.age<=59 order by coach.age DESC;
+***************************************************
+select players.name,country.name,players.age,goals,club_name,coach_name from players,country,
+club,coach where players.club_id=club.id and club.coach_id =coach.id and players.country_id =country.id order by players.age desc;
